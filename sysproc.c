@@ -238,3 +238,15 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+
+extern uint ticks;
+
+int sys_uptime_seconds(void) {
+  return ticks / 100; // 100 ticks per second in xv6
+}
+
+int sys_shutdown(void) {
+    outw(0x604, 0x2000);  // QEMU shutdown via ACPI
+    return 0;
+}

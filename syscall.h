@@ -26,3 +26,5 @@
 #define SYS_pstree  26
 #define SYS_getppid  27
 #define SYS_getstate 28
+#define SYS_uptime_seconds 29  // or next available number
+#define SYS_shutdown  30  // use next unused number

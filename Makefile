@@ -185,6 +185,9 @@ UPROGS=\
 	_msgtest\
 	_wc\
 	_zombie\
+	_uptime_test\
+	_testshutdown\
+	
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)

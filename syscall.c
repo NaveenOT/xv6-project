@@ -108,6 +108,8 @@ extern int sys_write(void);
 extern int sys_getstate(void);
 extern int sys_getppid(void);
 extern int sys_uptime(void);
+extern int sys_uptime_seconds(void);
+extern int sys_shutdown(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -138,6 +140,8 @@ static int (*syscalls[])(void) = {
 [SYS_send] sys_send,
 [SYS_recv] sys_recv,
 [SYS_pstree]  sys_pstree,
+[SYS_uptime_seconds] sys_uptime_seconds,
+[SYS_shutdown]    sys_shutdown,
 };
 
 void

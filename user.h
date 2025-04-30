@@ -35,6 +35,8 @@ int sleep(int);
 int uptime(void);
 int pstree(void);
 int getprocs(struct proc_info *info, int max);
+int uptime_seconds(void);
+int shutdown(void);
 
 // ulib.c
 int stat(const char*, struct stat*);
