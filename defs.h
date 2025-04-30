@@ -169,7 +169,8 @@ extern struct spinlock tickslock;
 void            uartinit(void);
 void            uartintr(void);
 void            uartputc(int);
-
+//reboot
+int sys_reboot(void);
 // vm.c
 void            seginit(void);
 void            kvmalloc(void);

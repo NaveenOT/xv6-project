@@ -17,7 +17,8 @@ static struct proc *initproc;
 int nextpid = 1;
 extern void forkret(void);
 extern void trapret(void);
-
+struct proc proc[NPROC];  // Define the global process array
+struct spinlock proc_lock;
 static void wakeup1(void *chan);
 
 void
@@ -25,7 +26,10 @@ pinit(void)
 {
   initlock(&ptable.lock, "ptable");
 }
-
+//void initproc() {
+    // Initialize the proc_lock to protect the global process array
+  //  initlock(&proc_lock, "proc_lock");/
+//}
 // Must be called with interrupts disabled
 int
 cpuid() {

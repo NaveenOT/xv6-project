@@ -17,6 +17,7 @@ OBJS = \
 	proc.o\
 	sleeplock.o\
 	spinlock.o\
+	reboot.o\
 	string.o\
 	swtch.o\
 	syscall.o\
@@ -178,7 +179,9 @@ UPROGS=\
 	_rm\
 	_sh\
 	_stressfs\
+	_reboottest\
 	_usertests\
+	_msgtest\
 	_wc\
 	_zombie\
 

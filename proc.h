@@ -1,3 +1,8 @@
+// Adding fields for shared message buffer and has_msg flag
+#define SHARED_MSG_BUF_SIZE 128
+
+
+
 // Per-CPU state
 struct cpu {
   uchar apicid;                // Local APIC ID
@@ -10,8 +15,6 @@ struct cpu {
   struct proc *proc;           // The process running on this cpu or null
 };
 
-extern struct cpu cpus[NCPU];
-extern int ncpu;
 
 //PAGEBREAK: 17
 // Saved registers for kernel context switches.
@@ -35,6 +38,7 @@ struct context {
 enum procstate { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };
 
 // Per-process state
+
 struct proc {
   uint sz;                     // Size of process memory (bytes)
   pde_t* pgdir;                // Page table
@@ -49,6 +53,9 @@ struct proc {
   struct file *ofile[NOFILE];  // Open files
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
+  char msgbuf[128];
+    char shared_msgbuf[SHARED_MSG_BUF_SIZE];  // Shared message buffer
+  int has_msg;
 };
 
 // Process memory is laid out contiguously, low addresses first:
@@ -56,3 +63,14 @@ struct proc {
 //   original data and bss
 //   fixed-size stack
 //   expandable heap
+struct proc_info {
+  int pid;
+  char name[16];
+};
+
+// In proc.h, declare the global proc array and the lock
+extern struct proc proc[NPROC];   // Global process array
+extern struct spinlock proc_lock; // Spinlock to protect the global proc array
+
+extern struct cpu cpus[NCPU];
+extern int ncpu;
