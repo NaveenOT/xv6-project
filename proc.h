@@ -56,6 +56,9 @@ struct proc {
   char msgbuf[128];
     char shared_msgbuf[SHARED_MSG_BUF_SIZE];  // Shared message buffer
   int has_msg;
+  // Inside struct proc (proc.h)
+  int ppid; // Add this if it's not already tracked
+  
 };
 
 // Process memory is laid out contiguously, low addresses first:

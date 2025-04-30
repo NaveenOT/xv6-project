@@ -1,3 +1,4 @@
+typedef unsigned int uint;
 struct stat;
 struct rtcdate;
 struct proc_info {
@@ -23,13 +24,16 @@ int mkdir(const char*);
 int chdir(const char*);
 int dup(int);
 int reboot(void);
+int getstate(void);
 int send(char *msg);
 int recv(char *buf);
+int getppid(void);
 int meminfo();
 int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
+int pstree(void);
 int getprocs(struct proc_info *info, int max);
 
 // ulib.c

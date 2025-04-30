@@ -10,6 +10,61 @@
 extern struct proc proc[NPROC];
 extern struct spinlock proc_lock;
 
+extern uint ticks;
+// sys_getppid - Returns the parent process ID
+int sys_getppid(void) {
+    return myproc()->parent->pid;  // Access the PID of the parent process
+}
+// sys_getstate - Returns the state of the current process
+int sys_getstate(void) {
+    return myproc()->state;  // Return the state of the current process
+}
+
+// Helper function to print the process tree recursively
+void print_pstree(int ppid, int level) {
+  // Iterate over the process table
+  for (int i = 0; i < NPROC; i++) {
+    // Skip unused processes
+    if (proc[i].state == UNUSED)
+      continue;
+
+    // Check if this process's parent is the given ppid
+    if (proc[i].parent && proc[i].parent->pid == ppid) {
+      
+      // Indentation for child processes
+      for (int j = 0; j < level; j++)
+        cprintf("  "); // Indentation for tree hierarchy
+      
+      // Print process information
+      cprintf("|- PID: %d, PPID: %d, State: %d, Name: %s\n", 
+              proc[i].pid, proc[i].parent ? proc[i].parent->pid : -1, 
+              proc[i].state, proc[i].name);
+      
+      // Recursively print child processes
+      print_pstree(proc[i].pid, level + 1);
+    }
+  }
+}
+
+// System call to print the process tree
+int sys_pstree(void) {
+  acquire(&proc_lock);
+  cprintf("Process Tree:\n");
+
+  // Iterate over all processes and print root processes (those without parents)
+  for (int i = 0; i < NPROC; i++) {
+    // Skip unused processes
+    if (proc[i].state != UNUSED && proc[i].parent == 0) {
+      cprintf("Root Process - PID: %d, Name: %s\n", proc[i].pid, proc[i].name);
+      print_pstree(proc[i].pid, 1);  // Print its child processes
+    }
+  }
+
+  release(&proc_lock);
+  return 0;
+}
+
+
 int sys_send(void)
 {
   char *msg;

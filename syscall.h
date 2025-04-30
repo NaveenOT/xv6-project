@@ -23,3 +23,6 @@
 #define SYS_reboot 23 
 #define SYS_send  24
 #define SYS_recv  25
+#define SYS_pstree  26
+#define SYS_getppid  27
+#define SYS_getstate 28

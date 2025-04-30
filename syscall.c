@@ -87,6 +87,7 @@ extern int sys_close(void);
 extern int sys_dup(void);
 extern int sys_exec(void);
 extern int sys_exit(void);
+
 extern int sys_fork(void);
 extern int sys_fstat(void);
 extern int sys_getpid(void);
@@ -104,6 +105,8 @@ extern int sys_recv(void);
 extern int sys_unlink(void);
 extern int sys_wait(void);
 extern int sys_write(void);
+extern int sys_getstate(void);
+extern int sys_getppid(void);
 extern int sys_uptime(void);
 
 static int (*syscalls[])(void) = {
@@ -116,21 +119,25 @@ static int (*syscalls[])(void) = {
 [SYS_exec]    sys_exec,
 [SYS_fstat]   sys_fstat,
 [SYS_chdir]   sys_chdir,
+[SYS_getstate]    sys_getstate, 
 [SYS_dup]     sys_dup,
 [SYS_getpid]  sys_getpid,
 [SYS_sbrk]    sys_sbrk,
 [SYS_sleep]   sys_sleep,
 [SYS_uptime]  sys_uptime,
 [SYS_open]    sys_open,
+[SYS_getppid]    sys_getppid,
 [SYS_write]   sys_write,
 [SYS_mknod]   sys_mknod,
 [SYS_unlink]  sys_unlink,
 [SYS_link]    sys_link,
 [SYS_mkdir]   sys_mkdir,
+[SYS_pstree]    sys_pstree,
 [SYS_close]   sys_close,
 [SYS_reboot] sys_reboot,
 [SYS_send] sys_send,
 [SYS_recv] sys_recv,
+[SYS_pstree]  sys_pstree,
 };
 
 void

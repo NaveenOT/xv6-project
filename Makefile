@@ -181,6 +181,7 @@ UPROGS=\
 	_stressfs\
 	_reboottest\
 	_usertests\
+	_pstreetest\
 	_msgtest\
 	_wc\
 	_zombie\
